@@ -14,6 +14,14 @@ bin key: code-graph-rag-mcp
 修改记录:
 1. 修改package.json: name改为@iflow-mcp/er77-code-graph-rag-mcp，移除自依赖@er77/code-graph-rag-mcp
 2. 修改tsup.config.ts: 添加external模块包括sharp, better-sqlite3, sqlite-vec, onnxruntime-node, @xenova/transformers
-构建成功: 874.56 KB
+3. 修改src/parsers/tree-sitter-parser.ts: 添加kotlin加载失败的优雅降级处理
+构建成功: 875.31 KB
 本地测试环境变量: MCP_EMBEDDING_ENABLED=false
 本地测试结果: 成功，获取到28个工具
+
+[2026-02-12] [SUCCESS] 步骤4：推送iflow分支
+使用HTTP/1.1协议成功推送iflow分支到远程仓库
+
+[2026-02-12] [SUCCESS] 步骤5：上传到官方仓库
+包名: @iflow-mcp/er77-code-graph-rag-mcp@2.7.18
+上传结果: 成功

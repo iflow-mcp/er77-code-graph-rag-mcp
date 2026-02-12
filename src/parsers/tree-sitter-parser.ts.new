@@ -1,0 +1,19 @@
+      // Check if tree-sitter-kotlin is available
+      const kotlinLang = await this.ensureLanguage(language);
+      if (!kotlinLang) {
+        // Fall back to regex-based Kotlin analyzer
+        const ko = await this.kotlinAnalyzer.analyze(content, filePath);
+        entities = ko.entities || [];
+        relationships = ko.relationships || [];
+        console.warn(
+          `[TreeSitterParser] Kotlin analysis (regex fallback): ${entities.length} entities, ${relationships.length} relationships`,
+        );
+      } else {
+        const ko = await this.kotlinAnalyzer.analyze(tree.rootNode as any, filePath);
+        entities = ko.entities || [];
+        relationships = ko.relationships || [];
+        console.error(
+          `[TreeSitterParser] Kotlin analysis: ${entities.length} entities, ${relationships.length} relationships`,
+        );
+      }
+    } else {

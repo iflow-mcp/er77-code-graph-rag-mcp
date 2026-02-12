@@ -1,0 +1,3 @@
+{
+  "serverConfig": "{\"mcpServers\":{\"code-graph-rag-mcp\":{\"command\":\"npx\",\"args\":[\"-y\",\"@iflow-mcp/er77-code-graph-rag-mcp\"],\"env\":{\"MCP_EMBEDDING_ENABLED\":\"false\"},\"values\":{}}}}"
+}

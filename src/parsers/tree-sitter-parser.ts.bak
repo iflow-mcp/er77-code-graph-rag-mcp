@@ -244,12 +244,6 @@ export class TreeSitterParser {
       console.error(`[TreeSitterParser] Loaded language: ${language}`);
       return lang;
     } catch (e: any) {
-      console.error(`[TreeSitterParser] Language '${language}' is not available: ${e?.message || e}`);
-      // For kotlin, gracefully degrade instead of throwing error
-      if (language === "kotlin") {
-        console.warn(`[TreeSitterParser] Kotlin support disabled (tree-sitter-kotlin not available)`);
-        return null;
-      }
       throw new Error(`[TreeSitterParser] Language '${language}' is not available: ${e?.message || e}`);
     }
   }
@@ -394,21 +388,12 @@ export class TreeSitterParser {
         `[TreeSitterParser] Java analysis: ${entities.length} entities, ${relationships.length} relationships`,
       );
     } else if (language === "kotlin") {
-      // Check if tree-sitter-kotlin is available
-      const kotlinLang = await this.ensureLanguage(language);
-      if (!kotlinLang) {
-        // tree-sitter-kotlin not available, return empty results
-        entities = [];
-        relationships = [];
-        console.warn(`[TreeSitterParser] Kotlin support disabled (tree-sitter-kotlin not available)`);
-      } else {
-        const ko = await this.kotlinAnalyzer.analyze(tree.rootNode as any, filePath);
-        entities = ko.entities || [];
-        relationships = ko.relationships || [];
-        console.error(
-          `[TreeSitterParser] Kotlin analysis: ${entities.length} entities, ${relationships.length} relationships`,
-        );
-      }
+      const ko = await this.kotlinAnalyzer.analyze(tree.rootNode as any, filePath);
+      entities = ko.entities || [];
+      relationships = ko.relationships || [];
+      console.error(
+        `[TreeSitterParser] Kotlin analysis: ${entities.length} entities, ${relationships.length} relationships`,
+      );
     } else {
       // Default parser for JS/TS/etc
       entities = await this.extractEntities(tree.rootNode as any, content);
