@@ -32,6 +32,14 @@ export default defineConfig({
     "tree-sitter-rust",
     "tree-sitter-go",
     "tree-sitter-java",
+    "tree-sitter-kotlin",
+
+    // Native modules
+    "sharp",
+    "better-sqlite3",
+    "sqlite-vec",
+    "onnxruntime-node",
+    "@xenova/transformers",
   ],
 
   // Type generation
